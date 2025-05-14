@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON DRIFT | Школа дрифта нового поколения</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+        
+        :root {
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --neon-purple: #d300c5;
+            --dark-bg: #0d0221;
+            --text-glow: 0 0 10px currentColor;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* Главное меню - горизонтальный скролл */
+        .menu-scroll {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px 0;
+            background: linear-gradient(90deg, rgba(13,2,33,0) 0%, rgba(5,217,232,0.2) 50%, rgba(13,2,33,0) 100%);
+            scrollbar-width: none;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        .menu-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .menu-item {
+            flex: 0 0 auto;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50px;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-shadow: var(--text-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.3), transparent);
+            transition: 0.6s;
+        }
+        
+        .menu-item:hover::before {
+            left: 100%;
+        }
+        
+        .menu-item:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        /* Герой-секция с видео-фоном */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            margin: 0;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255,42,109,0.5);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .hero:hover h1::after {
+            transform: scaleX(1);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: transparent;
+            border: 3px solid var(--neon-pink);
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-shadow: var(--text-glow);
+        }
+        
+        .cta-button:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-pink);
+            transform: translateY(-5px);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,42,109,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Анимированные разделы */
+        .section {
+            padding: 100px 20px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: rgba(5, 217, 232, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(5, 217, 232, 0.4);
+        }
+        
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(5, 217, 232, 0.1), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .feature-card:hover::after {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Фотогалерея дрифта */
+        .gallery-section {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, #0d0221 0%, #0a0118 100%);
+        }
+        
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 16/9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: var(--transition);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(13,2,33,0.8) 0%, transparent 50%);
+            z-index: 1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(5, 217, 232, 0.3);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 2;
+            transition: var(--transition);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            bottom: 0;
+        }
+        
+        /* Анимированный счетчик */
+        .stats-section {
+            background: linear-gradient(135deg, rgba(5,217,232,0.1) 0%, rgba(13,2,33,0.8) 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+        
+        .stat-item {
+            margin: 20px;
+            padding: 30px;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--neon-pink);
+            margin: 10px 0;
+            text-shadow: 0 0 15px var(--neon-pink);
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Секция контактов */
+        .contact-section {
+            background: linear-gradient(to right, #0d0221 0%, #1a0442 100%);
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%2305d9e8" stroke-width="0.5" stroke-dasharray="5,5" opacity="0.3"/></svg>');
+            opacity: 0.1;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-card {
+            background: rgba(5, 217, 232, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(5, 217, 232, 0.3);
+        }
+
+        .contact-card h3 {
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-card p, .contact-card a {
+            color: white;
+            margin: 10px 0;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .contact-form {
+            background: rgba(5, 217, 232, 0.05);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .contact-form:hover {
+            box-shadow: 0 0 30px rgba(211, 0, 197, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            border-radius: 5px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 12px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .map-container {
+            height: 300px;
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(5, 217, 232, 0.2);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .stat-item {
+                min-width: auto;
+                padding: 20px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Главное меню с горизонтальным скроллом -->
+    <div class="menu-scroll">
+        <div class="menu-item">Гараж</div>
+        <div class="menu-item">VR-Тренировки</div>
+        <div class="menu-item">Дрифт-Квесты</div>
+        <div class="menu-item">NFT-Сертификаты</div>
+        <div class="menu-item">Дрифт-Рейвы</div>
+        <div class="menu-item">Эко-Дрифт</div>
+        <div class="menu-item">Киносъемки</div>
+    </div>
+
+    <!-- Герой-секция с видеофоном -->
+    <section class="hero">
+        <video autoplay muted loop class="video-bg">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-car-drifting-on-a-race-track-39879-large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>NEON DRIFT</h1>
+            <p style="font-size: 1.5rem; max-width: 800px; margin: 20px auto; color: var(--neon-blue); text-shadow: var(--text-glow);">
+                Где адреналин встречает инновации. Первая школа дрифта с элементами VR, NFT и киберспорта.
+            </p>
+            <button class="cta-button">START YOUR DRIFT</button>
+        </div>
+    </section>
+
+    <!-- Фотогалерея дрифта -->
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <h2 class="section-title">ГАЛЕРЕЯ ДРИФТА</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://sun9-36.userapi.com/impg/SweHt-045Q_ur_cOhQA7Cy9lIiC2VKRYa-EGpg/frY-MIo-q8A.jpg?size=604x402&quality=96&sign=f4e2a99fdbde3c2d7bca95d8691c2d79&type=album" alt="Дрифт на треке">
+                    <div class="gallery-caption">Nissan 370Z на соревнованиях</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/originals/69/ea/a9/69eaa9f2d380fd34227c5c216d887ef2.jpg" alt="Групповой дрифт">
+                    <div class="gallery-caption">Синхронный групповой дрифт</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/originals/00/e0/db/00e0db08ca622880b57e6f4bacad560f.jpg" alt="Ночной дрифт">
+                    <div class="gallery-caption">Неоновый дрифт под свет прожекторов</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=b9b041c2fbc4ace73137b65cab09d47a421cac34-5360359-images-thumbs&n=13" alt="Дрифт в горах">
+                    <div class="gallery-caption">Горный серпантин - высший пилотаж</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://catalog.orsk.ru/uploads/news/logotype/3500/Brian__Dom_-_Toyota_Supra.jpg" alt="Классический дрифт">
+                    <div class="gallery-caption">Легендарный Toyota Supra в действии</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://a.d-cd.net/WQAAAgA0h-A-960.jpg" alt="Дрифт с дымом">
+                    <div class="gallery-caption">Искусство управления дымом</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://a.d-cd.net/YyAAAgN1kuA-1920.jpg" alt="Городской дрифт">
+                    <div class="gallery-caption">Ночные улицы Токио - эталон стиля</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://get.wallhere.com/photo/1920x1080-px-car-Gran-Turismo-5-lights-Toyota-Supra-tunnel-video-games-684282.jpg" alt="Неоновый дрифт">
+                    <div class="gallery-caption">Светодиодный перфоманс в темноте</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Мы в цифрах</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" data-count="1500">0</div>
+                <div class="stat-label">Учеников</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="299">0</div>
+                <div class="stat-label">Автомобиля</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="365">0</div>
+                <div class="stat-label">Дней в году</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="600">0</div>
+                <div class="stat-label">Трюков</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция контактов -->
+    <section class="contact-section">
+        <h2 class="section-title">КОНТАКТЫ</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Наш адрес</h3>
+                    <p>г. Москва, ул. Дрифтовая, 42</p>
+                    <p>Автодром "Неоновый круг"</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.373789035729!2d37.61842331593097!3d55.75199998055211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5a738fa419%3A0x7c347d506b52311f!2z0JrRgNCw0YHQvdCw0Y8g0J_RgNC10YHQvdGL0Lkg0JrRgNCw0YHQvdC-0Lkg0JzQvtGB0LrQvtCy0YHQutC40Lk!5e0!3m2!1sru!2sru!4v1620000000000!5m2!1sru!2sru" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Телефоны</h3>
+                    <p><a href="tel:+78005553535">8 (800) 555-35-35</a> - общие вопросы</p>
+                    <p><a href="tel:+74951234567">8 (495) 123-45-67</a> - запись на тренировки</p>
+                    <p><a href="tel:+79030000000">8 (903) 000-00-00</a> - корпоративные мероприятия</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Электронная почта</h3>
+                    <p><a href="mailto:info@neondrift.ru">info@neondrift.ru</a> - общие вопросы</p>
+                    <p><a href="mailto:book@neondrift.ru">book@neondrift.ru</a> - бронирование</p>
+                    <p><a href="mailto:press@neondrift.ru">press@neondrift.ru</a> - для СМИ</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📹</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🔊</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3 style="color: var(--neon-purple); font-family: 'Orbitron', sans-serif; margin-top: 0;">ОСТАВЬТЕ ЗАЯВКУ</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Электронная почта</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">ОТПРАВИТЬ</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Анимация при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctaButton = document.querySelector('.cta-button');
+            
+            // Обновленный обработчик клика для кнопки (без мини-игры)
+            ctaButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Прокрутка к следующей секции
+                document.querySelector('.gallery-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Параллакс-эффект для видео-фона
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const videoBg = document.querySelector('.video-bg');
+                videoBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                
+                // Анимация появления карточек
+                const cards = document.querySelectorAll('.feature-card');
+                cards.forEach((card, index) => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if(cardPosition < screenPosition) {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+                
+                // Анимация счетчиков
+                const statNumbers = document.querySelectorAll('.stat-number');
+                statNumbers.forEach(number => {
+                    const position = number.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if(position < screenPosition && !number.classList.contains('animated')) {
+                        animateCount(number);
+                        number.classList.add('animated');
+                    }
+                });
+            });
+            
+            // Функция анимации счетчика
+            function animateCount(element) {
+                const target = parseInt(element.getAttribute('data-count'));
+                const duration = 2000; // 2 секунды
+                const step = Math.floor(target / (duration / 16)); // 60fps
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if(current >= target) {
+                        clearInterval(timer);
+                        current = target;
+                    }
+                    element.textContent = current;
+                }, 16);
+            }
+            
+            // Инициализация карточек (скрыты до скролла)
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Плавная прокрутка для меню
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetSection = this.textContent.toLowerCase().replace(' ', '-');
+                    const section = document.getElementById(targetSection);
+                    if(section) {
+                        window.scrollTo({
+                            top: section.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
