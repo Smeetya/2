@@ -3,93 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON DRIFT | Школа дрифта нового поколения</title>
+    <title>NEON DRIFT | Где адреналин встречает инновации</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
-        
         :root {
             --neon-pink: #ff2a6d;
             --neon-blue: #05d9e8;
             --neon-purple: #d300c5;
             --dark-bg: #0d0221;
+            --text-light: #ffffff;
             --text-glow: 0 0 10px currentColor;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Rajdhani', sans-serif;
+        }
+        
+        body {
             background-color: var(--dark-bg);
-            color: white;
+            color: var(--text-light);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
-        /* Главное меню - горизонтальный скролл */
-        .menu-scroll {
+        /* Шапка с фиксированным позиционированием */
+        header {
+            background: rgba(13, 2, 33, 0.9);
+            padding: 1rem 2rem;
             display: flex;
-            overflow-x: auto;
-            padding: 20px 0;
-            background: linear-gradient(90deg, rgba(13,2,33,0) 0%, rgba(5,217,232,0.2) 50%, rgba(13,2,33,0) 100%);
-            scrollbar-width: none;
-            position: sticky;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(5, 217, 232, 0.2);
         }
         
-        .menu-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .menu-item {
-            flex: 0 0 auto;
-            padding: 15px 30px;
-            margin: 0 10px;
-            border: 2px solid var(--neon-blue);
-            border-radius: 50px;
-            color: var(--neon-blue);
-            font-family: 'Orbitron', sans-serif;
+        .logo {
+            font-size: 2rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: var(--transition);
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-shadow: var(--text-glow);
-            position: relative;
-            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
         }
         
-        .menu-item::before {
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        nav a:hover {
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+        }
+        
+        nav a::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.3), transparent);
-            transition: 0.6s;
         }
         
-        .menu-item:hover::before {
-            left: 100%;
-        }
-        
-        .menu-item:hover {
-            background: var(--neon-blue);
-            color: var(--dark-bg);
-            box-shadow: 0 0 20px var(--neon-blue);
-            transform: translateY(-3px);
-        }
-        
-        /* Герой-секция с видео-фоном */
+        /* Герой-секция с видеофоном */
         .hero {
-            position: relative;
             height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            overflow: hidden;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
         }
         
         .video-bg {
@@ -104,8 +118,10 @@
         }
         
         .hero-content {
-            text-align: center;
+            position: relative;
             z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
             animation: fadeIn 1.5s ease-out;
         }
         
@@ -115,14 +131,14 @@
         }
         
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            margin: 0;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
             background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 15px rgba(255,42,109,0.5);
+            text-shadow: 0 0 20px rgba(255, 42, 109, 0.5);
+            font-family: 'Orbitron', sans-serif;
             position: relative;
             display: inline-block;
         }
@@ -144,22 +160,31 @@
             transform: scaleX(1);
         }
         
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+        }
+        
         .cta-button {
             display: inline-block;
-            margin-top: 30px;
-            padding: 15px 40px;
+            padding: 1rem 2.5rem;
             background: transparent;
             border: 3px solid var(--neon-pink);
             color: var(--neon-pink);
-            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            font-weight: 700;
             font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
+            border-radius: 50px;
             transition: var(--transition);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
             position: relative;
             overflow: hidden;
-            text-shadow: var(--text-glow);
         }
         
         .cta-button:hover {
@@ -184,66 +209,64 @@
             left: 100%;
         }
         
-        /* Анимированные разделы */
-        .section {
-            padding: 100px 20px;
-            position: relative;
-        }
-        
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 60px;
-            color: var(--neon-blue);
-            text-shadow: var(--text-glow);
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* Секция услуг */
+        .services {
+            padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        .feature-card {
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
             background: rgba(5, 217, 232, 0.05);
-            border: 1px solid var(--neon-blue);
             border-radius: 10px;
-            padding: 30px;
+            padding: 2.5rem 2rem;
             transition: var(--transition);
+            border: 1px solid var(--neon-blue);
             position: relative;
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
         }
         
-        .feature-card.visible {
+        .service-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .feature-card:hover {
+        .service-card:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 0 10px 30px rgba(5, 217, 232, 0.4);
+            border-color: var(--neon-purple);
         }
         
-        .feature-card::after {
+        .service-card::after {
             content: '';
             position: absolute;
             top: 0;
@@ -254,7 +277,7 @@
             transform: translateX(-100%);
         }
         
-        .feature-card:hover::after {
+        .service-card:hover::after {
             animation: shine 1.5s;
         }
         
@@ -264,16 +287,28 @@
             }
         }
         
-        /* Фотогалерея дрифта */
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .service-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        /* Галерея */
         .gallery-section {
-            padding: 100px 0;
+            padding: 6rem 0;
             background: linear-gradient(to bottom, #0d0221 0%, #0a0118 100%);
         }
         
         .gallery-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
         
         .gallery-grid {
@@ -342,10 +377,10 @@
             bottom: 0;
         }
         
-        /* Анимированный счетчик */
+        /* Статистика */
         .stats-section {
             background: linear-gradient(135deg, rgba(5,217,232,0.1) 0%, rgba(13,2,33,0.8) 100%);
-            padding: 80px 0;
+            padding: 6rem 0;
             text-align: center;
         }
         
@@ -380,11 +415,11 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
-        /* Секция контактов */
+        
+        /* Контакты */
         .contact-section {
             background: linear-gradient(to right, #0d0221 0%, #1a0442 100%);
-            padding: 100px 20px;
+            padding: 6rem 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -565,32 +600,96 @@
             border: none;
         }
         
-        /* Мобильная адаптация */
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--neon-purple);
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--text-glow);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .footer-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .footer-social-link:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Адаптивность */
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
             h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             
-            .section-title {
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            h2 {
                 font-size: 2rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: 1fr;
             }
             
             .stats-container {
                 flex-direction: column;
-                align-items: center;
                 gap: 20px;
             }
             
             .stat-item {
-                min-width: auto;
                 padding: 20px;
             }
 
@@ -599,37 +698,74 @@
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Главное меню с горизонтальным скроллом -->
-    <div class="menu-scroll">
-        <div class="menu-item">Гараж</div>
-        <div class="menu-item">VR-Тренировки</div>
-        <div class="menu-item">Дрифт-Квесты</div>
-        <div class="menu-item">NFT-Сертификаты</div>
-        <div class="menu-item">Дрифт-Рейвы</div>
-        <div class="menu-item">Эко-Дрифт</div>
-        <div class="menu-item">Киносъемки</div>
-    </div>
-
-    <!-- Герой-секция с видеофоном -->
+    <!-- Шапка -->
+    <header>
+        <div class="logo">NEON DRIFT</div>
+        <nav>
+            <ul>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#stats">Статистика</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Герой-секция -->
     <section class="hero">
         <video autoplay muted loop class="video-bg">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-car-drifting-on-a-race-track-39879-large.mp4" type="video/mp4">
         </video>
         <div class="hero-content">
             <h1>NEON DRIFT</h1>
-            <p style="font-size: 1.5rem; max-width: 800px; margin: 20px auto; color: var(--neon-blue); text-shadow: var(--text-glow);">
-                Где адреналин встречает инновации. Первая школа дрифта с элементами VR, NFT и киберспорта.
-            </p>
-            <button class="cta-button">START YOUR DRIFT</button>
+            <p class="tagline">Где адреналин встречает инновации. Первая школа дрифта с элементами VR, NFT и киберспорта.</p>
+            <a href="#services" class="cta-button">START YOUR DRIFT</a>
         </div>
     </section>
-
-    <!-- Фотогалерея дрифта -->
-    <section class="gallery-section">
+    
+    <!-- Услуги -->
+    <section class="services" id="services">
+        <h2>Наши Услуги</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>ГАРАЖ</h3>
+                <p>Профессиональные автомобили для дрифта с полным техническим обслуживанием и тюнингом.</p>
+            </div>
+            <div class="service-card">
+                <h3>VR-ТРЕНИРОВКИ</h3>
+                <p>Иммерсивные тренировки в виртуальной реальности для оттачивания навыков дрифта.</p>
+            </div>
+            <div class="service-card">
+                <h3>ДРИФТ-КВЕСТЫ</h3>
+                <p>Экстремальные квесты и соревнования с элементами дрифта и головоломок.</p>
+            </div>
+            <div class="service-card">
+                <h3>NFT-CEPТИФИКАТЫ</h3>
+                <p>Уникальные цифровые сертификаты об участии в мероприятиях и достижениях.</p>
+            </div>
+            <div class="service-card">
+                <h3>ДРИФТ-РЕЙВЫ</h3>
+                <p>Ночные мероприятия, сочетающие дрифт-шоу и электронную музыку.</p>
+            </div>
+            <div class="service-card">
+                <h3>ЭКО-ДРИФТ</h3>
+                <p>Инновационные программы дрифта с использованием экологичных технологий.</p>
+            </div>
+            <div class="service-card">
+                <h3>КИНОСЪЕМКИ</h3>
+                <p>Организация и проведение съемок с элементами дрифта для фильмов и клипов.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Галерея -->
+    <section class="gallery-section" id="gallery">
         <div class="gallery-container">
-            <h2 class="section-title">ГАЛЕРЕЯ ДРИФТА</h2>
+            <h2>ГАЛЕРЕЯ ДРИФТА</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="https://sun9-36.userapi.com/impg/SweHt-045Q_ur_cOhQA7Cy9lIiC2VKRYa-EGpg/frY-MIo-q8A.jpg?size=604x402&quality=96&sign=f4e2a99fdbde3c2d7bca95d8691c2d79&type=album" alt="Дрифт на треке">
@@ -666,9 +802,10 @@
             </div>
         </div>
     </section>
-
-    <section class="section">
-        <h2 class="section-title">Мы в цифрах</h2>
+    
+    <!-- Статистика -->
+    <section class="stats-section" id="stats">
+        <h2>Мы в цифрах</h2>
         <div class="stats-container">
             <div class="stat-item">
                 <div class="stat-number" data-count="1500">0</div>
@@ -688,10 +825,10 @@
             </div>
         </div>
     </section>
-
-    <!-- Секция контактов -->
-    <section class="contact-section">
-        <h2 class="section-title">КОНТАКТЫ</h2>
+    
+    <!-- Контакты -->
+    <section class="contact-section" id="contacts">
+        <h2>КОНТАКТЫ</h2>
         <div class="contact-container">
             <div class="contact-info">
                 <div class="contact-card">
@@ -720,10 +857,10 @@
                     <p><a href="mailto:press@neondrift.ru">press@neondrift.ru</a> - для СМИ</p>
                     
                     <div class="social-links">
-                        <a href="#" class="social-link">📱</a>
-                        <a href="#" class="social-link">📹</a>
-                        <a href="#" class="social-link">📷</a>
-                        <a href="#" class="social-link">🔊</a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
             </div>
@@ -752,29 +889,32 @@
             </div>
         </div>
     </section>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-logo">NEON DRIFT</div>
+        <div class="footer-social-links">
+            <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="footer-social-link"><i class="fab fa-discord"></i></a>
+        </div>
+        <p class="copyright">© 2023 NEON DRIFT. Все права защищены.</p>
+    </footer>
 
     <script>
         // Анимация при скролле
         document.addEventListener('DOMContentLoaded', function() {
-            const ctaButton = document.querySelector('.cta-button');
-            
-            // Обновленный обработчик клика для кнопки (без мини-игры)
-            ctaButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Прокрутка к следующей секции
-                document.querySelector('.gallery-section').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-            
             // Параллакс-эффект для видео-фона
             window.addEventListener('scroll', function() {
                 const scrollPosition = window.pageYOffset;
                 const videoBg = document.querySelector('.video-bg');
-                videoBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                if(videoBg) {
+                    videoBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                }
                 
                 // Анимация появления карточек
-                const cards = document.querySelectorAll('.feature-card');
+                const cards = document.querySelectorAll('.service-card');
                 cards.forEach((card, index) => {
                     const cardPosition = card.getBoundingClientRect().top;
                     const screenPosition = window.innerHeight / 1.3;
@@ -802,8 +942,8 @@
             // Функция анимации счетчика
             function animateCount(element) {
                 const target = parseInt(element.getAttribute('data-count'));
-                const duration = 2000; // 2 секунды
-                const step = Math.floor(target / (duration / 16)); // 60fps
+                const duration = 2000;
+                const step = Math.floor(target / (duration / 16));
                 let current = 0;
                 
                 const timer = setInterval(() => {
@@ -817,26 +957,11 @@
             }
             
             // Инициализация карточек (скрыты до скролла)
-            const cards = document.querySelectorAll('.feature-card');
+            const cards = document.querySelectorAll('.service-card');
             cards.forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(50px)';
                 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            });
-            
-            // Плавная прокрутка для меню
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const targetSection = this.textContent.toLowerCase().replace(' ', '-');
-                    const section = document.getElementById(targetSection);
-                    if(section) {
-                        window.scrollTo({
-                            top: section.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
             });
         });
     </script>
